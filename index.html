@@ -4,46 +4,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0b0b0d">
-
+  <meta name="description" content="Re+ helps you organize tasks, events, and your time.">
   <title>Re+ — Organize your life</title>
-  <meta name="description"
-        content="Re+ helps you organize tasks, events and goals in one place.">
 
   <style>
-    :root {
-      color-scheme: dark;
-      --bg: #0b0b0d;
-      --panel: #141418;
-      --text: #f7f7f8;
-      --muted: #a1a1aa;
-      --accent: #c8ff4d;
-      --border: #29292f;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
-
-    * { box-sizing: border-box; }
 
     body {
-      margin: 0;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      background: var(--bg);
-      color: var(--text);
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-                   sans-serif;
-    }
-
-    header, footer {
-      width: min(100% - 40px, 1050px);
-      margin: 0 auto;
+                   Roboto, Helvetica, Arial, sans-serif;
+      background: #ffffff;
+      color: #171717;
+      line-height: 1.6;
     }
 
     header {
-      padding: 28px 0;
+      width: 100%;
+      padding: 24px 8%;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      border-bottom: 1px solid #eeeeee;
     }
 
     .logo {
@@ -52,127 +37,102 @@
       letter-spacing: -1.5px;
     }
 
-    .logo span { color: var(--accent); }
-
-    .version {
-      color: var(--muted);
-      font-size: 13px;
+    header a {
+      color: #171717;
+      text-decoration: none;
+      font-weight: 600;
     }
 
     main {
-      flex: 1;
-      width: min(100% - 40px, 760px);
-      margin: 0 auto;
-      padding: 80px 0 100px;
+      min-height: 78vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       text-align: center;
+      padding: 80px 20px;
     }
 
-    .eyebrow {
-      display: inline-block;
-      padding: 8px 13px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      color: var(--accent);
-      font-size: 13px;
+    .tag {
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 18px;
     }
 
     h1 {
-      margin: 24px 0 16px;
-      font-size: clamp(48px, 9vw, 82px);
-      line-height: 1;
-      letter-spacing: -5px;
+      font-size: clamp(44px, 8vw, 76px);
+      line-height: 1.05;
+      letter-spacing: -3px;
+      max-width: 800px;
+      margin-bottom: 22px;
     }
 
-    h1 span { color: var(--accent); }
-
-    .intro {
+    .description {
       max-width: 540px;
-      margin: 0 auto;
-      color: var(--muted);
+      color: #666;
       font-size: 18px;
-      line-height: 1.7;
+      margin-bottom: 34px;
     }
 
     .downloads {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-      max-width: 520px;
-      margin: 38px auto 0;
-    }
-
-    .download {
       display: flex;
-      flex-direction: column;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .download-button {
+      display: inline-flex;
+      justify-content: center;
       align-items: center;
-      gap: 7px;
-      padding: 19px 12px;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      background: var(--panel);
-      color: var(--text);
+      min-width: 190px;
+      padding: 14px 22px;
+      border-radius: 12px;
+      background: #171717;
+      color: white;
       text-decoration: none;
-      transition: border-color .2s, transform .2s;
+      font-size: 15px;
+      font-weight: 650;
+      border: 1px solid #171717;
+      transition: transform 0.2s, background 0.2s;
     }
 
-    .download:hover:not(.disabled) {
-      border-color: var(--accent);
+    .download-button:hover {
       transform: translateY(-2px);
+      background: #333;
     }
 
-    .download.primary {
-      background: var(--accent);
-      color: #111;
-      border-color: var(--accent);
+    .download-button.secondary {
+      background: white;
+      color: #171717;
+      border-color: #dddddd;
     }
 
-    .download.disabled {
-      opacity: .55;
-      cursor: not-allowed;
+    .download-button.secondary:hover {
+      background: #f7f7f7;
     }
 
-    .download strong { font-size: 15px; }
-    .download small { font-size: 12px; opacity: .75; }
+    .download-button.disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
 
-    #status {
-      max-width: 520px;
-      margin: 20px auto 0;
-      padding: 12px 14px;
-      color: var(--muted);
+    #download-status {
+      margin-top: 16px;
+      min-height: 24px;
       font-size: 13px;
-      line-height: 1.6;
-    }
-
-    #status.error { color: #ffb4ab; }
-
-    .retry {
-      display: none;
-      margin: 0 auto;
-      padding: 9px 14px;
-      border: 1px solid var(--border);
-      border-radius: 9px;
-      background: transparent;
-      color: var(--text);
-      cursor: pointer;
-    }
-
-    .retry:hover { border-color: var(--accent); }
-
-    .description {
-      margin-top: 75px;
-      padding-top: 28px;
-      border-top: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.8;
+      color: #777;
     }
 
     footer {
-      padding: 25px 0;
-      border-top: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 12px;
-      text-align: center;
+      border-top: 1px solid #eeeeee;
+      padding: 24px 8%;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      color: #777;
+      font-size: 13px;
     }
 
     footer a {
@@ -180,280 +140,210 @@
       text-decoration: none;
     }
 
-    footer a:hover { color: var(--accent); }
+    @media (max-width: 600px) {
+      header {
+        padding: 20px 6%;
+      }
 
-    @media (max-width: 520px) {
-      main { padding-top: 55px; }
-      h1 { letter-spacing: -3px; }
-      .downloads { grid-template-columns: 1fr; }
+      main {
+        padding: 64px 20px;
+      }
+
+      h1 {
+        letter-spacing: -2px;
+      }
+
+      .description {
+        font-size: 16px;
+      }
+
+      .downloads {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        max-width: 320px;
+      }
+
+      footer {
+        padding: 20px 6%;
+      }
     }
   </style>
 </head>
 
 <body>
   <header>
-    <div class="logo">Re<span>+</span></div>
-    <div class="version" id="version">Checking latest version…</div>
+    <a href="#" class="logo">Re+</a>
+    <a href="https://github.com/lorenzocesarini-tech/replus-website/releases"
+       target="_blank" rel="noopener noreferrer">GitHub ↗</a>
   </header>
 
   <main>
-    <div class="eyebrow">Your life, organized.</div>
+    <p class="tag">A simpler way to stay organized</p>
 
-    <h1>Meet Re<span>+</span></h1>
+    <h1>Your life.<br>Organized.</h1>
 
-    <p class="intro">
-      Organize your tasks, manage your events and make time
-      for what matters. Everything in one place.
+    <p class="description">
+      Re+ helps you organize your tasks, manage your time,
+      and focus on what matters.
     </p>
 
-    <section class="downloads" aria-label="Download Re+">
-      <a id="macDownload" class="download primary disabled"
-         href="#" aria-disabled="true">
-        <strong>Download for macOS</strong>
-        <small id="macLabel">Finding latest release…</small>
+    <div class="downloads">
+      <a id="mac-download"
+         class="download-button disabled"
+         href="#"
+         aria-label="Download Re+ for macOS">
+        Loading macOS download...
       </a>
 
-      <a id="windowsDownload" class="download disabled"
-         href="#" aria-disabled="true">
-        <strong>Download for Windows</strong>
-        <small id="windowsLabel">Checking availability…</small>
+      <a id="windows-download"
+         class="download-button secondary disabled"
+         href="#"
+         aria-label="Download Re+ for Windows">
+        Windows — Coming soon
       </a>
-    </section>
+    </div>
 
-    <p id="status" role="status" aria-live="polite">
-      Connecting to GitHub to find the latest downloads…
+    <p id="download-status" role="status" aria-live="polite">
+      Finding the latest version...
     </p>
-
-    <button id="retry" class="retry" type="button">
-      Try again
-    </button>
-
-    <section class="description">
-      <p>
-        Built to help students and everyone else plan their time
-        with less stress and more focus.
-      </p>
-      <p>
-        Downloads are provided through GitHub Releases.
-      </p>
-    </section>
   </main>
 
   <footer>
-    <p>© <span id="year"></span> Re+ ·
-      <a href="https://github.com/lorenzocesarini-tech/replus-website"
-         target="_blank" rel="noopener noreferrer">
-        GitHub
-      </a>
-    </p>
+    <span>© 2026 Re+</span>
+    <a href="https://github.com/lorenzocesarini-tech/replus-website/releases"
+       target="_blank" rel="noopener noreferrer">All releases</a>
   </footer>
 
   <script>
-    (() => {
-      "use strict";
+    // GitHub repository containing the releases.
+    const GITHUB_OWNER = "lorenzocesarini-tech";
+    const GITHUB_REPO = "replus-website";
 
-      const OWNER = "lorenzocesarini-tech";
-      const REPO = "replus-website";
+    const API_URL =
+      `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/releases`;
 
-      const API_URL =
-        `https://api.github.com/repos/${OWNER}/${REPO}/releases/latest`;
+    const RELEASES_URL =
+      `https://github.com/${GITHUB_OWNER}/${GITHUB_REPO}/releases`;
 
-      const RELEASES_URL =
-        `https://github.com/${OWNER}/${REPO}/releases`;
+    const macButton = document.getElementById("mac-download");
+    const windowsButton = document.getElementById("windows-download");
+    const statusText = document.getElementById("download-status");
 
-      const macButton = document.getElementById("macDownload");
-      const winButton = document.getElementById("windowsDownload");
-      const macLabel = document.getElementById("macLabel");
-      const winLabel = document.getElementById("windowsLabel");
-      const versionLabel = document.getElementById("version");
-      const status = document.getElementById("status");
-      const retryButton = document.getElementById("retry");
+    function isZip(asset) {
+      return asset.name.toLowerCase().endsWith(".zip");
+    }
 
-      document.getElementById("year").textContent =
-        new Date().getFullYear();
+    function identifyPlatform(filename) {
+      const name = filename.toLowerCase();
 
-      let requestController = null;
-
-      function setStatus(message, isError = false) {
-        status.textContent = message;
-        status.classList.toggle("error", isError);
+      if (/(macos|mac-os|mac_os|mac\b|darwin|osx|apple)/i.test(name)) {
+        return "mac";
       }
 
-      function setDownload(button, label, asset) {
-        if (!asset) {
-          button.href = "#";
-          button.classList.add("disabled");
-          button.setAttribute("aria-disabled", "true");
-          button.removeAttribute("download");
-          return;
-        }
-
-        button.href = asset.browser_download_url;
-        button.classList.remove("disabled");
-        button.setAttribute("aria-disabled", "false");
-        label.textContent = asset.name;
+      if (/(windows|win32|win64|win\b|\.exe\b|\.msi\b)/i.test(name)) {
+        return "windows";
       }
 
-      function findAsset(assets, platform) {
-        const zipAssets = assets.filter(asset =>
-          /\.zip$/i.test(asset.name)
-        );
+      return "unknown";
+    }
 
-        if (platform === "mac") {
-          // Prefer the exact expected name.
-          const exact = zipAssets.find(asset =>
-            asset.name.toLowerCase() === "replus-macos.zip"
-          );
-
-          if (exact) return exact;
-
-          // Otherwise look for a macOS-specific ZIP.
-          const matches = zipAssets.filter(asset =>
-            /macos|mac-os|macosx|osx|darwin|mac/i.test(asset.name) &&
-            !/windows|win32|win64/i.test(asset.name)
-          );
-
-          return matches.length === 1 ? matches[0] : null;
-        }
-
-        const exact = zipAssets.find(asset =>
-          /replus.*windows.*\.zip$/i.test(asset.name)
-        );
-
-        if (exact) return exact;
-
-        const matches = zipAssets.filter(asset =>
-          /windows|win64|win32/i.test(asset.name)
-        );
-
-        return matches.length === 1 ? matches[0] : null;
-      }
-
-      async function loadRelease() {
-        if (requestController) requestController.abort();
-
-        requestController = new AbortController();
-        const signal = requestController.signal;
-
-        retryButton.style.display = "none";
-        versionLabel.textContent = "Checking version…";
-        macLabel.textContent = "Finding download…";
-        winLabel.textContent = "Finding download…";
-
-        setDownload(macButton, macLabel, null);
-        setDownload(winButton, winLabel, null);
-
-        setStatus("Connecting to GitHub to find the latest downloads…");
-
-        try {
-          const response = await fetch(API_URL, {
-            signal,
-            headers: { Accept: "application/vnd.github+json" },
-            cache: "no-store"
-          });
-
-          if (!response.ok) {
-            throw new Error(
-              response.status === 404
-                ? "GitHub could not find a published release."
-                : `GitHub returned error ${response.status}.`
-            );
-          }
-
-          const release = await response.json();
-
-          if (release.draft || release.prerelease) {
-            throw new Error(
-              "The latest release is not a public stable release."
-            );
-          }
-
-          const assets = Array.isArray(release.assets)
-            ? release.assets.filter(asset =>
-                asset.browser_download_url &&
-                asset.state === "uploaded"
-              )
-            : [];
-
-          const macAsset = findAsset(assets, "mac");
-          const winAsset = findAsset(assets, "windows");
-
-          versionLabel.textContent =
-            release.tag_name || "Latest release";
-
-          if (macAsset) {
-            setDownload(macButton, macLabel, macAsset);
-          } else {
-            macLabel.textContent = "Download unavailable";
-          }
-
-          if (winAsset) {
-            setDownload(winButton, winLabel, winAsset);
-          } else {
-            winLabel.textContent = "Not available yet";
-          }
-
-          if (!macAsset && !winAsset) {
-            throw new Error(
-              "No recognizable macOS or Windows ZIP was found " +
-              "in the latest release. Check the release assets on GitHub."
-            );
-          }
-
-          if (!macAsset || !winAsset) {
-            setStatus(
-              "Some downloads are unavailable. Check the GitHub " +
-              "release assets if you expected another platform."
-            );
-          } else {
-            setStatus("Downloads are ready.");
-          }
-
-        } catch (error) {
-          if (error.name === "AbortError") return;
-
-          console.error("Re+ download error:", error);
-
-          versionLabel.textContent = "Release unavailable";
-
-          // Do not leave broken links enabled.
-          setDownload(macButton, macLabel, null);
-          setDownload(winButton, winLabel, null);
-
-          macLabel.textContent = "Try again later";
-          winLabel.textContent = "Try again later";
-
-          setStatus(
-            `${error.message} You can open GitHub Releases directly ` +
-            "to check the available files.",
-            true
-          );
-
-          const link = document.createElement("a");
-          link.href = RELEASES_URL;
-          link.target = "_blank";
-          link.rel = "noopener noreferrer";
-          link.textContent = " Open GitHub Releases";
-          link.style.color = "inherit";
-          status.appendChild(link);
-
-          retryButton.style.display = "inline-block";
-        }
-      }
-
-      // Prevent disabled download buttons from navigating to "#".
-      [macButton, winButton].forEach(button => {
-        button.addEventListener("click", event => {
-          if (button.getAttribute("aria-disabled") === "true") {
-            event.preventDefault();
+    async function loadDownloads() {
+      try {
+        const response = await fetch(API_URL, {
+          cache: "no-store",
+          headers: {
+            "Accept": "application/vnd.github+json"
           }
         });
-      });
 
-      retryButton.addEventListener("click", loadRelease);
+        if (!response.ok) {
+          throw new Error(`GitHub API returned ${response.status}`);
+        }
 
-      loadRelease();
-    })();
+        const releases = await response.json();
+
+        // Use the newest published stable release, not an older version.
+        const stableReleases = releases
+          .filter(release =>
+            !release.draft &&
+            !release.prerelease &&
+            release.assets
+          )
+          .sort((a, b) => {
+            const dateA = new Date(a.published_at || a.created_at).getTime();
+            const dateB = new Date(b.published_at || b.created_at).getTime();
+            return dateB - dateA;
+          });
+
+        if (stableReleases.length === 0) {
+          throw new Error("No published stable release was found.");
+        }
+
+        const latest = stableReleases[0];
+        const zipAssets = latest.assets.filter(isZip);
+
+        // Prefer an asset whose filename explicitly identifies macOS.
+        let macAsset = zipAssets.find(
+          asset => identifyPlatform(asset.name) === "mac"
+        );
+
+        // If there is exactly one ZIP, use it as macOS even if renamed.
+        // This matches the current setup: one ZIP per release.
+        if (!macAsset && zipAssets.length === 1) {
+          macAsset = zipAssets[0];
+        }
+
+        // Never guess which of multiple unrecognized ZIPs is for macOS.
+        if (macAsset) {
+          macButton.href = macAsset.browser_download_url;
+          macButton.textContent = "Download for macOS";
+          macButton.classList.remove("disabled");
+          macButton.setAttribute("aria-label",
+            `Download Re+ for macOS, ${latest.tag_name}`);
+        } else {
+          macButton.href = RELEASES_URL;
+          macButton.textContent = "Find macOS download";
+          macButton.classList.remove("disabled");
+          statusText.textContent =
+            "Couldn't identify the macOS ZIP in the latest release.";
+        }
+
+        // Windows remains separate. It is enabled when a Windows ZIP
+        // can be identified by its filename.
+        const windowsAsset = zipAssets.find(
+          asset => identifyPlatform(asset.name) === "windows"
+        );
+
+        if (windowsAsset) {
+          windowsButton.href = windowsAsset.browser_download_url;
+          windowsButton.textContent = "Download for Windows";
+          windowsButton.classList.remove("disabled");
+        } else {
+          windowsButton.href = "#";
+          windowsButton.textContent = "Windows — Coming soon";
+          windowsButton.classList.add("disabled");
+        }
+
+        if (macAsset) {
+          statusText.textContent =
+            `Latest version: ${latest.tag_name}`;
+        }
+
+      } catch (error) {
+        console.error("Unable to load Re+ downloads:", error);
+
+        // Keep a working route to the releases page if the API fails.
+        macButton.href = RELEASES_URL;
+        macButton.textContent = "Get Re+ on GitHub";
+        macButton.classList.remove("disabled");
+
+        statusText.textContent =
+          "Couldn't load downloads automatically. Open GitHub releases instead.";
+      }
+    }
+
+    loadDownloads();
   </script>
 </body>
 </html>
